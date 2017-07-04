@@ -1,0 +1,12 @@
+/*! ________________ 
+ *   ___  ____/_  __ \
+ *   __  /_   _  / / /
+ *   _  __/   / /_/ / 
+ *   /_/      \____/  
+ *   Focus Overlay
+ * 
+ *  Version: 0.0.1
+ *  Author: Maurice Mahan
+ *  License: MIT
+ *  Repo: https://github.com/MauriceMahan/FocusOverlay
+ */#focus-overlay{opacity:0;-webkit-box-shadow:0 0 2px 3px #78aeda,0 0 2px #78aeda inset;box-shadow:0 0 2px 3px #78aeda,0 0 2px #78aeda inset;border-radius:2px;-webkit-transition:all .2s cubic-bezier(0,1,0,1);transition:all .2s cubic-bezier(0,1,0,1);display:none}#focus-overlay.focus-overlay-active{display:block}#focus-overlay.focus-overlay-animating{opacity:1}.focus-overlay-target{outline:0}

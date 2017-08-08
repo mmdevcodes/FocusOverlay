@@ -2,6 +2,8 @@
 
 Plugin for creating overlays on focused elements. Inspired by NV's [Flying Focus](https://github.com/NV/flying-focus) UI concept. It was built with accessibility in mind with trigger keys and ARIA roles.
 
+![Focus Overlay](http://i.imgur.com/zMFb7m4.gif)
+
 ## Installation
 
 To install copy the files from the `dist` folder into your project:
@@ -13,7 +15,7 @@ To install copy the files from the `dist` folder into your project:
 <!-- End of <body> -->
 <script type="text/javascript" src="/dist/focusOverlay.min.js"></script>
 ```
-The CSS file is so small you might just want to copy the contents of it from the `dist` folder directly into your project's main CSS.
+The CSS file is so small you might just want to copy the contents of it from the `src` folder directly into your project's main CSS.
 
 ## Usage
 

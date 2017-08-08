@@ -18,12 +18,12 @@ The CSS file is so small you might just want to copy the contents of it from the
 ## Usage
 
 ```js
-    $(document).ready(function() {
-        $(".site-wrapper").focusOverlay(options);
-    });
+$(document).ready(function() {
+    $(".site-wrapper").focusOverlay(options);
+});
 ```
 
-The above will append focusOverlay to the `.site-wrapper` element. The `options` is an optional parameter. See [options](#Options) for more info.
+The above will append focusOverlay to the `.site-wrapper` element. The `options` is an optional parameter. See [options](#options) for more info.
 
 By default focusOverlay will show and animate when hitting keyboard keys such as the `Tab` key. It's also preconfigured to animate via CSS transitions.
 
@@ -50,9 +50,9 @@ The default `options` are:
 ## Events
 
 ```js
-    $("body").on("foInit", function(event, ...) {
-        // Do something
-    }).focusOverlay();
+$("body").on("foInit", function(event, ...) {
+    // Do something
+}).focusOverlay();
 ```
 
 Note that bindings need to be added *before* the plugin is called.
@@ -87,7 +87,7 @@ In this example focusOverlay will not target this element at all.
 
 ## Browser support
 
-FocusOverlay works on IE9+ in addition to other modern browsers such as Chrome, Firefox, and Safari. See [notes](#Notes) for some exceptions.
+FocusOverlay works on IE9+ in addition to other modern browsers such as Chrome, Firefox, and Safari. See [notes](#notes) for exceptions.
 
 ## Dependencies
 

@@ -1,15 +1,15 @@
- /*! ________________ 
- *   ___  ____/_  __ \
- *   __  /_   _  / / /
- *   _  __/   / /_/ / 
- *   /_/      \____/  
- *   Focus Overlay
- * 
- *  Version: 0.0.1
- *  Author: Maurice Mahan
- *  License: MIT
- *  Repo: https://github.com/MauriceMahan/FocusOverlay
- */
+/*! ________________ 
+*   ___  ____/_  __ \
+*   __  /_   _  / / /
+*   _  __/   / /_/ / 
+*   /_/      \____/  
+*   Focus Overlay
+* 
+*  Version: 0.0.1
+*  Author: Maurice Mahan
+*  License: MIT
+*  Repo: https://github.com/MauriceMahan/FocusOverlay
+*/
 
 ;(function (factory) {
     if (typeof define === 'function' && define.amd) {
@@ -67,6 +67,7 @@
         _.animateFocusBox = $.proxy(_.animateFocusBox, _);
         _.cleanup = $.proxy(_.cleanup, _);
         _.stop = $.proxy(_.stop, _);
+        _.destroy = $.proxy(_.destroy, _);
 
         // Initialize the plugin instance
         _.init();
@@ -195,13 +196,21 @@
         animateFocusBox: function($target) {
             var _ = this;
             
-            if ($target.length) {
+            /**
+             * Check to see if what we're targetting is actually still there.
+             * Then check to see if we're targetting a DOM element. There was
+             * an issue with the document and window sometimes being targetting
+             * and throwing errors since you can't get the position values of those.
+             */
+            if ($target.length > 0 && $target[0] instanceof Element) {
                 _.$el.trigger("foBeforeDurationTimer", [_, _.$previousTarget, $target]);
 
-                var width = $target.outerWidth(),
-                    height = $target.outerHeight(),
-                    left = $target.offset().left,
-                    top = $target.offset().top;
+                var rect = _._getAbsoluteBoundingRect($target[0]),
+                    width = rect.width,
+                    height = rect.height,
+                    left = rect.left,
+                    top = rect.top;
+
 
                 _.$focusBox.addClass(_.options.animatingClass)
                     .addClass(_.options.activeClass)
@@ -240,7 +249,55 @@
             window.removeEventListener("focus", _.onFocusHandler, true);
             window.removeEventListener("keydown", _.onKeyDownHandler, false);
             window.removeEventListener("click", _.stop, false);
-            window.removeEventListener("focus", _.onFocusHandler, true);
+        },
+
+        /**
+         * Gist: https://gist.github.com/rgrove/5463265
+         * 
+         * This is a modified, cross-browser version of the native `getBoundingClientRect()`
+         * Which returns a bounding rect for _el_ with absolute coordinates corrected for
+         * scroll positions.
+         * 
+         * @param {HTMLElement} el HTML element
+         * @return {Event} Absolute bounding rect for _el_.
+         */
+        _getAbsoluteBoundingRect: function (el) {
+            var _ = this,
+                doc = document,
+                win = window,
+                body = doc.body,
+
+                // pageXOffset and pageYOffset work everywhere except IE <9.
+                offsetX = win.pageXOffset !== undefined ? win.pageXOffset :
+                    (doc.documentElement || body.parentNode || body).scrollLeft,
+                offsetY = win.pageYOffset !== undefined ? win.pageYOffset :
+                    (doc.documentElement || body.parentNode || body).scrollTop,
+
+                rect = el.getBoundingClientRect();
+
+            if (el !== body) {
+                var parent = el.parentNode;
+
+                // The element's rect will be affected by the scroll positions of
+                // *all* of its scrollable parents, not just the window, so we have
+                // to walk up the tree and collect every scroll offset. Good times.
+                // Also have to check if the parent is not null, since IE will throw
+                // that in there for no apparent reason.
+                while (parent !== body && parent) {
+                    offsetX += parent.scrollLeft;
+                    offsetY += parent.scrollTop;
+                    parent = parent.parentNode;
+                }
+            }
+
+            return {
+                bottom: rect.bottom + offsetY,
+                height: rect.height,
+                left: rect.left + offsetX,
+                right: rect.right + offsetX,
+                top: rect.top + offsetY,
+                width: rect.width
+            };
         }
     };
     
@@ -260,7 +317,7 @@
      * Default options
      */
     $.fn.focusOverlay.defaults = {
-        id: "focus-overlay",
+        id: "focus-overlay", // ID added to the focus box
         activeClass: "focus-overlay-active", // Class added while the focus box is active
         animatingClass: "focus-overlay-animating", // Class added while the focus box is animating
         targetClass: "focus-overlay-target", // Class added to the target element
@@ -272,5 +329,4 @@
         inactiveOnClick: true, // Make focus box inactive when a user clicks
         alwaysActive: false, // Force the box to always stay active. Overrides inactiveOnClick
     };
-
 }));

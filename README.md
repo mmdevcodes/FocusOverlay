@@ -62,8 +62,8 @@ Note that bindings need to be added *before* the plugin is called.
 Event | Params | Description
 ------ | -------- | -----------
 foInit | event, focusOverlay | Fires after focusOverlay initializes
-foBeforeDurationTimer | event, focusOverlay, $previousTarget, $target | Fires before focusOverlay begins its duration timer.
-foAfterDurationTimer | event, focusOverlay, $previousTarget, $target | Fires after focusOverlay's duration timer is finished.
+foBeforeMove | event, focusOverlay, $previousTarget, $target | Fires before focusOverlay begins its duration timer.
+foAfterMove | event, focusOverlay, $previousTarget, $target | Fires after focusOverlay's duration timer is finished.
 
 ## Data Attribute Settings
 

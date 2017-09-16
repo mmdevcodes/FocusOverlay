@@ -203,7 +203,7 @@
              * and throwing errors since you can't get the position values of those.
              */
             if ($target.length > 0 && $target[0] instanceof Element) {
-                _.$el.trigger("foBeforeDurationTimer", [_, _.$previousTarget, $target]);
+                _.$el.trigger("foBeforeMove", [_, _.$previousTarget, $target]);
 
                 var rect = _._getAbsoluteBoundingRect($target[0]),
                     width = rect.width,
@@ -228,7 +228,7 @@
                         _.$focusBox.removeClass(_.options.activeClass);
                     }
                     
-                    _.$el.trigger("foAfterDurationTimer", [_, _.$previousTarget, $target]);
+                    _.$el.trigger("foAfterMove", [_, _.$previousTarget, $target]);
                 }, _.options.duration);
             } else {
                 _.cleanup();

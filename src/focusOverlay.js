@@ -245,6 +245,13 @@
             // Remove any attached data from your plugin
             _.$el.removeData();
 
+            // Remove focusBox
+            _.$focusBox.remove();
+
+            // Remove any extra classes given to other elements if they exist
+            (_.$previousTarget != null) && _.$previousTarget.removeClass(_.options.targetClass);
+            (_.$target != null) && _.$target.removeClass(_.options.targetClass);
+
             // Remove event listeners
             window.removeEventListener("focus", _.onFocusHandler, true);
             window.removeEventListener("keydown", _.onKeyDownHandler, false);
@@ -301,17 +308,49 @@
         }
     };
     
-    $.fn.focusOverlay = function(options) {
+    $.fn.focusOverlay = function (options) {
+        var args = arguments;
+
         /**
          * Creates a new plugin instance, for each selected element,
          * and stores a reference within the element's data
          */
-        return this.each(function() {
-            if (!$.data(this, 'plugin_' + focusOverlay)) {
-                $.data(this, 'plugin_' + focusOverlay, new focusOverlay(this, options));
+        if (options === undefined || typeof options === 'object') {
+            return this.each(function () {
+                if (!$.data(this, 'plugin_' + focusOverlay)) {
+                    $.data(this, 'plugin_' + focusOverlay, new focusOverlay(this, options));
+                }
+            });
+        } else if (typeof options === 'string' && options[0] !== '_' && options !== 'init') {
+            /**
+             * Call a public plugin method (not starting
+             * with an underscore) for each selected element.
+             */
+            if (Array.prototype.slice.call(args, 1).length == 0 && $.inArray(options, $.fn.focusOverlay.getters) != -1) {
+                /**
+                 * If the user does not pass any arguments and the method
+                 * allows to work as a getter then break the chainability
+                 * so we can return a value instead of the element reference.
+                 */
+                var instance = $.data(this[0], 'plugin_' + focusOverlay);
+                return instance[options].apply(instance, Array.prototype.slice.call(args, 1));
+            } else {
+                // Invoke the specified method on each selected element
+                return this.each(function () {
+                    var instance = $.data(this, 'plugin_' + focusOverlay);
+                    if (instance instanceof focusOverlay && typeof instance[options] === 'function') {
+                        instance[options].apply(instance, Array.prototype.slice.call(args, 1));
+                    }
+                });
             }
-        });
+        }
     };
+
+    /**
+     * Names of the pluguin methods that can act as a getter method.
+     * @type {Array}
+     */
+    $.fn.focusOverlay.getters = ["destroy"];
 
     /**
      * Default options

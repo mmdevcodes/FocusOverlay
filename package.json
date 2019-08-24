@@ -1,6 +1,6 @@
 {
   "name": "focus-overlay",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Library for creating overlays on focused elements.",
   "license": "MIT",
   "engines": {

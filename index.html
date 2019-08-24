@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Original test page written by Dominic Mazzoni -->
+    <title>Focus Overlay Demo</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="dist/focusOverlay.css" />
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      div,
+      input,
+      textarea,
+      h1,
+      h2 {
+        font-family: arial, sans-serif;
+      }
+
+      div:not(.focus-overlay) {
+        margin: 1em 0;
+      }
+
+      div[contenteditable] {
+        width: 10em;
+        min-height: 2em;
+        padding: 0.2em;
+        border: 1px solid #000;
+      }
+
+      label {
+        display: block;
+        margin: 1em 0;
+      }
+
+      select {
+        width: 10em;
+      }
+
+      .foTest {
+        display: none;
+        margin: 0 10px;
+      }
+
+      a.transition-test {
+        display: block;
+        background: rgba(255, 255, 255, 0.8);
+        max-width: 260px;
+        padding: 10px;
+        text-transform: uppercase;
+        color: #06427c;
+        font-weight: bold;
+        font-size: 15px;
+        font-size: 0.9375rem;
+        border: 1px solid #f28d1d;
+        text-align: center;
+        transition: all 0.5s linear;
+      }
+
+      a.transition-test:hover,
+      a.transition-test:focus {
+        background: #06427c;
+        color: #fff;
+        text-decoration: none;
+        max-width: 300px;
+      }
+
+      a.transition-test.perm.trans {
+        background: #06427c;
+        color: #fff;
+        text-decoration: none;
+        max-width: 300px;
+      }
+
+      a.transition-test.inner span {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        background: blue;
+        margin: 5px;
+        transition: all 1.5s linear;
+      }
+
+      a.transition-test.inner:hover span,
+      a.transition-test.inner:focus span {
+        background: orange;
+      }
+
+      .section-one {
+        border: 1px solid blue;
+      }
+
+      .section-two {
+        border: 1px solid green;
+      }
+
+      .section-two .focus-overlay {
+        box-shadow: 0 0 3px 2px green;
+      }
+
+      .section-two .focus-overlay:after {
+        box-shadow: 0 0 2px 1px green, 0 0 2px green inset;
+      }
+
+      small {
+        font-size: 0.6em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>
+      FocusOverlay -
+      <small
+        ><a href="https://github.com/mmahandev/FocusOverlay">Repo</a></small
+      >
+    </h1>
+    <ul>
+      <li>
+        This page contains various html controls and demonstrates when the
+        keyboard is being used to show FocusOverlay.
+      </li>
+      <li>Navigate through the interactive elements with your tab key.</li>
+      <li>Outlined sections have their own scoped instance.</li>
+    </ul>
+    <h2>Buttons</h2>
+    <div class="section-one">
+      <b>Default Settings</b>
+      <div>
+        <label> <input type="checkbox" />Checkbox</label>
+      </div>
+      <div>
+        <label> <input name="a" type="radio" />Radio 1</label>
+        <label> <input name="b" type="radio" />Radio 2</label>
+      </div>
+      <div>
+        <button>Button</button>
+      </div>
+      <div>
+        <input type="submit" value="Submit button" />
+      </div>
+      <div>
+        <a href="#">Regular Link</a>
+      </div>
+      <h2 tabindex="0">Editable text</h2>
+      <div>
+        <input placeholder="Single line" />
+      </div>
+      <div>
+        <textarea placeholder="Multi line"></textarea>
+      </div>
+      <h2>Transitions</h2>
+      <div>
+        <a href="#" class="transition-test">Link with focus transition</a>
+      </div>
+      <div>
+        <a href="#" class="transition-test perm"
+          >Link with permanent focus transition</a
+        >
+      </div>
+      <div tabindex="0">
+        <a href="#" class="transition-test inner"
+          >Link with focus transition and outer element that's focusable</a
+        >
+      </div>
+      <div>
+        <a href="#" class="transition-test inner"
+          >Link with focus transition and inner element with focus transition
+          <span>&nbsp;</span>
+        </a>
+      </div>
+      <h2>Iframe</h2>
+      <iframe
+        title="Inline Frame Example"
+        width="300"
+        height="200"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=-0.004017949104309083%2C51.47612752641776%2C0.00030577182769775396%2C51.478569861898606&layer=mapnik"
+      >
+      </iframe>
+      <div>
+        <div>
+          <a href="#" class="transition-test"
+            >Transitioned link after iframe focus</a
+          >
+        </div>
+      </div>
+      <div><a href="#">Regular link before iframe</a></div>
+      <iframe
+        src="//mdn-samples.mozilla.org/snippets/html/iframe-simple-contents.html"
+        frameborder="0"
+        width="100"
+        height="100"
+      ></iframe>
+      <div><input type="text" placeholder="Regular input after iframe" /></div>
+      <video controls width="250">
+        <source
+          src="//interactive-examples.mdn.mozilla.net/media/examples/flower.webm"
+          type="video/webm"
+        />
+        <source
+          src="//interactive-examples.mdn.mozilla.net/media/examples/flower.mp4"
+          type="video/mp4"
+        />
+        Sorry, your browser doesn't support embedded videos.
+      </video>
+      <div>
+        <input type="text" placeholder="Item after video" />
+      </div>
+    </div>
+    <div class="section-two">
+      <b><i>alwaysActive</i> set to true</b>
+      <div>
+        <div contenteditable="true">Contenteditable explicitly set to true</div>
+      </div>
+      <div>
+        <div contenteditable>Contenteditable</div>
+      </div>
+      <div>
+        <div role="textbox" contenteditable="true">
+          Contenteditable with textbox role
+        </div>
+      </div>
+      <h2>Focusable <code>&lt;div&gt;</code>s</h2>
+      <div tabindex="0">
+        <code>tabindex="0"</code>
+      </div>
+      <div tabindex="-1">
+        <code>tabindex="-1"</code>
+      </div>
+      <div tabindex="0">
+        <code>tabindex="0"</code>
+      </div>
+      <h2>Selects</h2>
+      <label
+        >Select one from drop-down:
+        <br />
+        <select>
+          <option>Apple</option>
+          <option>Orange</option>
+          <option>Banana</option>
+        </select>
+      </label>
+      <label
+        >Select one from list:
+        <br />
+        <select size="5">
+          <option>Apple</option>
+          <option>Orange</option>
+          <option>Banana</option>
+        </select>
+      </label>
+      <label
+        >Select multiple:
+        <br />
+        <select multiple="">
+          <option>Apple</option>
+          <option>Orange</option>
+          <option>Banana</option>
+        </select>
+      </label>
+      <h2>Other</h2>
+      <label
+        >data-focus-label with no <i>for</i> attribute:
+        <br />
+        <input data-focus-label type="range" min="-20" max="20" value="0" />
+      </label>
+      <label
+        >Bowling score from 0 to 300:
+        <br />
+        <input type="range" min="0" max="300" value="0" />
+      </label>
+      <div>
+        <input type="date" value="2008-09-01" />
+      </div>
+      <div>
+        <input type="time" value="00:00:00" />
+      </div>
+      <div>
+        <input type="number" placeholder="Number" />
+      </div>
+      <div>
+        <input type="color" title="Color" value="#00ff00" />
+      </div>
+      <div>
+        <input type="file" title="File" />
+      </div>
+    </div>
+    <h2>FocusOverlay is not called on the elements below</h2>
+    <div>
+      <label> <input type="checkbox" />Checkbox</label>
+    </div>
+    <div>
+      <label> <input name="a" type="radio" />Radio 1</label>
+      <label> <input name="b" type="radio" />Radio 2</label>
+    </div>
+    <div>
+      <button>Button</button>
+    </div>
+    <script src="dist/focusOverlay.js"></script>
+    <script>
+      // Tests
+      const focusable = document.querySelectorAll(
+        'input, a, iframe, object, embed, [tabindex], [contenteditable], button, textarea, select, area'
+      );
+
+      for (let i; i > focusable.length; i++) {
+        focusable[i].setAttribute('id', 'control-' + i);
+      }
+
+      document.querySelector('.perm').addEventListener('focusin', function(e) {
+        e.target.classList.add('trans');
+      });
+
+      // Initialization
+      const sectionOne = document.querySelector('.section-one');
+      const sectionTwo = document.querySelector('.section-two');
+      const foOne = new FocusOverlay('.section-one', {
+        onInit: function(focusOverlay) {
+          console.log('ran', focusOverlay);
+        },
+        onBeforeMove: function(currentTarget, nextTarget, focusOverlay) {
+          console.log(currentTarget, nextTarget, focusOverlay);
+        },
+        // onAfterMove: function (previousTarget, currentTarget, focusOverlay) {
+        //     console.log(previousTarget, currentTarget, focusOverlay);
+        // },
+        onDestroy: function(focusOverlay) {
+          console.log('de_stroyed');
+        }
+      });
+      const foTwo = new FocusOverlay(sectionTwo, {
+        alwaysActive: true
+      });
+    </script>
+  </body>
+</html>

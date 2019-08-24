@@ -1,0 +1,37 @@
+{
+  "name": "gatsby-starter-stellar",
+  "version": "1.0.0",
+  "description": "Gatsby Starter - Stellar by HTML5 UP",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+  },
+  "author": "Hunter Chang",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write '**/*.js'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "dependencies": {
+    "gatsby": "^2.0.76",
+    "gatsby-plugin-manifest": "^2.0.9",
+    "gatsby-plugin-offline": "^2.0.16",
+    "gatsby-plugin-react-helmet": "^3.0.2",
+    "gatsby-plugin-sass": "^2.0.7",
+    "node-sass": "^4.11.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-helmet": "^5.2.0",
+    "react-scroll-to-element": "^0.2.0",
+    "react-scrollspy": "^3.3.5",
+    "react-waypoint": "^8.0.3"
+  },
+  "devDependencies": {
+    "prettier": "^1.14.2"
+  }
+}

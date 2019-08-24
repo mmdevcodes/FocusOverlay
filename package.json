@@ -24,7 +24,7 @@
     "lint": "eslint src/**/*.js",
     "lint:fix": "prettier-eslint src/**/*.js --write",
     "prebuild": "rimraf dist",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "npm run build && git add * && git commit -m 'Update build'",
     "release": "np patch --any-branch"
   },
   "files": [

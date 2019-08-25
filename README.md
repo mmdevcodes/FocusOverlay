@@ -12,27 +12,43 @@ Install with npm:
 npm install focusoverlay
 ```
 
-To install copy the files from the `dist` folder into your project:
+To install via the browser:
 
 ```html
 <!-- In the <head> -->
-<link rel="stylesheet" type="text/css" href="focusoverlay.css" />
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="//unpkg.com/focus-overlay@latest/dist/focusoverlay.css"
+/>
 
 <!-- End of <body> -->
-<script type="text/javascript" src="focusoverlay.js"></script>
+<script
+  type="text/javascript"
+  src="//unpkg.com/focus-overlay@latest/dist/focusoverlay.js"
+></script>
 ```
 
 The CSS is small enough to copy directly into your project's main stylesheet if you desire.
 
 ## Usage
 
+`FocusOverlay(element, options)`
+
 ```js
 import FocusOverlay from 'focusoverlay';
 
-const focusoverlay = new FocusOverlay('#site-container', options);
+// Zero config - Scopes to <body> element and uses default settings
+const fo = new FocusOverlay();
+
+// Or define an element
+const fo = new FocusOverlay(document.body, options);
+
+// Or define a CSS selector string
+const fo = new FocusOverlay('body#site-container', options);
 ```
 
-The above will initialize Focus Overlay and scope it to the `#site-container` element. If no element is supplied it will scope to the `body` element by default.
+The `element` takes either a string CSS selector or an HTML element. If no element is supplied it will scope to the `<body>` element by default.
 
 The `options` is an optional parameter. See [options](#options) for more info.
 
@@ -43,40 +59,38 @@ By default Focus Overlay will show and animate when hitting keyboard keys such a
 The default `options` are:
 
 ```js
-{
-    // Class added to the focus box
-    class: 'focus-overlay',
-    // Class added while the focus box is active
-    activeClass: 'focus-overlay-active',
-    // Class added while the focus box is animating
-    animatingClass: 'focus-overlay-animating',
-    // Class added to the target element
-    targetClass: 'focus-overlay-target',
-    // z-index of focus box
-    zIndex: 9001,
-    // Duration of the animatingClass (milliseconds)
-    duration: 500,
-    // Removes activeClass after duration
-    inactiveAfterDuration: false,
-    // Tab, Arrow Keys, Enter, Space, Shift, Ctrl, Alt, ESC
-    triggerKeys: [9, 36, 37, 38, 39, 40, 13, 32, 16, 17, 18, 27],
-    // Make focus box inactive when a non specified key is pressed
-    inactiveOnNonTriggerKey: true,
-    // Make focus box inactive when a user clicks
-    inactiveOnClick: true,
-    // Force the box to always stay active. Overrides everything
-    alwaysActive: false,
-    // Reposition focus box on transitionEnd for focused elements
-    watchTransitionEnd: true,
-    // Initialization event
-    onInit: function() {},
-    // Before focus box move
-    onBeforeMove: function() {},
-    // After focus box move
-    onAfterMove: function() {},
-    // After FocusOverlay is destroyed
-    onDestroy: function() {}
-}
+// Class added to the focus box
+class: 'focus-overlay',
+// Class added while the focus box is active
+activeClass: 'focus-overlay-active',
+// Class added while the focus box is animating
+animatingClass: 'focus-overlay-animating',
+// Class added to the target element
+targetClass: 'focus-overlay-target',
+// z-index of focus box
+zIndex: 9001,
+// Duration of the animatingClass (milliseconds)
+duration: 500,
+// Removes activeClass after duration
+inactiveAfterDuration: false,
+// Tab, Arrow Keys, Enter, Space, Shift, Ctrl, Alt, ESC
+triggerKeys: [9, 36, 37, 38, 39, 40, 13, 32, 16, 17, 18, 27],
+// Make focus box inactive when a non specified key is pressed
+inactiveOnNonTriggerKey: true,
+// Make focus box inactive when a user clicks
+inactiveOnClick: true,
+// Force the box to always stay active. Overrides everything
+alwaysActive: false,
+// Reposition focus box on transitionEnd for focused elements
+watchTransitionEnd: true,
+// Initialization event
+onInit: function() {},
+// Before focus box move
+onBeforeMove: function() {},
+// After focus box move
+onAfterMove: function() {},
+// After FocusOverlay is destroyed
+onDestroy: function() {}
 ```
 
 ## Methods

@@ -1,0 +1,44 @@
+/*! ________________
+*   ___  ____/_  __ \
+*   __  /_   _  / / /
+*   _  __/   / /_/ /
+*   /_/      \____/
+*   Focus Overlay
+*
+*  Version: 0.9.5
+*  Author: mmahandev
+*  License: MIT
+*  Repo: https://github.com/mmahandev/FocusOverlay
+*/
+
+#focus-overlay {
+    display: none;
+    position: relative;
+    border-radius: 2px;
+    box-shadow: 0 0 3px 2px #78aeda;
+    transition: all 0.2s cubic-bezier(0, 1, 0, 1);
+}
+
+#focus-overlay::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    box-shadow: 0 0 2px 1px #008cff, 0 0 2px #008cff inset;
+    transition: all 0.1s ease-out;
+}
+
+#focus-overlay.focus-overlay-active {
+    display: block;
+}
+
+#focus-overlay.focus-overlay-animating::after {
+    opacity: 1;
+}
+
+.focus-overlay-target {
+    outline: none;
+}

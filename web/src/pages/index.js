@@ -3,7 +3,6 @@ import { Link } from 'gatsby';
 import Helmet from 'react-helmet';
 import Waypoint from 'react-waypoint';
 import ReactMarkdown from 'react-markdown';
-import FocusOverlay from 'focus-overlay';
 
 import Layout from '../components/layout';
 import Header from '../components/Header';
@@ -17,10 +16,6 @@ class Index extends React.Component {
     this.state = {
       stickyNav: false
     };
-    this.focusoverlay = new FocusOverlay('body', {
-      alwaysActive: true,
-      zIndex: 10001
-    });
   }
 
   _handleWaypointEnter = () => {
@@ -32,15 +27,24 @@ class Index extends React.Component {
   };
 
   componentDidMount() {
-    this.focusoverlay.moveFocusBox(document.querySelector('body'));
+    import(/* webpackChunkName: "focus-overlay" */ 'focus-overlay')
+      .then(({ default: FocusOverlay }) => {
+        this.focusoverlay = new FocusOverlay('body', {
+          alwaysActive: true,
+          zIndex: 10001
+        });
 
-    setTimeout(() => {
-      const initialFocusEl = document.querySelector('#initial-focus');
+        this.focusoverlay.moveFocusBox(document.querySelector('body'));
 
-      if (document.body.contains(initialFocusEl)) {
-        this.focusoverlay.moveFocusBox(initialFocusEl);
-      }
-    }, 1500);
+        setTimeout(() => {
+          const initialFocusEl = document.querySelector('#initial-focus');
+
+          if (document.body.contains(initialFocusEl)) {
+            this.focusoverlay.moveFocusBox(initialFocusEl);
+          }
+        }, 1500);
+      })
+      .catch(console.error);
   }
 
   componentWillUnmount() {
@@ -71,7 +75,7 @@ class Index extends React.Component {
 Install with npm:
 
 \`\`\`bash
-npm install focusoverlay
+npm install focus-overlay
 \`\`\`
 
 Install in browser:
@@ -149,10 +153,12 @@ By default Focus Overlay will show and animate when hitting keyboard keys such a
             <div className="spotlight">
               <div className="content">
                 <header className="major">
-                  <h2>Options</h2>
+                  <h2 id="options">Options & Methods</h2>
                 </header>
                 <ReactMarkdown
                   source={`
+## Options
+
 The default \`options\` are:
 
 \`\`\`js

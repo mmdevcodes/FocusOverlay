@@ -9,7 +9,7 @@ Library for creating overlays on focused elements. It was built with accessibili
 Install with npm:
 
 ```bash
-npm install focusoverlay
+npm install focus-overlay
 ```
 
 Install in browser:

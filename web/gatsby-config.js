@@ -1,16 +1,18 @@
 module.exports = {
+  pathPrefix: '/FocusOverlay',
   siteMetadata: {
-    title: 'Gatsby Starter - Stellar by HTML5 UP',
-    author: 'Hunter Chang',
-    description: 'A Gatsby.js Starter based on Stellar by HTML5 UP'
+    title: 'Focus Overlay',
+    author: 'Maurice (mmahandev)',
+    description: 'Library for creating overlays on focused elements'
   },
   plugins: [
     'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'gatsby-starter-default',
-        short_name: 'starter',
+        name: 'focus-overlay',
+        short_name: 'focusoverlay',
+        pathPrefix: '/FocusOverlay',
         start_url: '/',
         background_color: '#663399',
         theme_color: '#663399',

@@ -2,8 +2,6 @@ import React from 'react';
 import GithubCorner from 'react-github-corner';
 import '../assets/scss/main.scss';
 
-import Footer from './Footer';
-
 class Template extends React.Component {
   constructor(props) {
     super(props);
@@ -31,7 +29,6 @@ class Template extends React.Component {
       <div className={`body ${this.state.loading}`}>
         <div id="wrapper">
           {children}
-          {/* <Footer /> */}
           <GithubCorner
             href="https://github.com/mmahandev/focusoverlay"
             svgStyle={{ position: 'fixed' }}

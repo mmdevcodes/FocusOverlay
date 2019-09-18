@@ -26,31 +26,31 @@ workbox.clientsClaim();
  */
 self.__precacheManifest = [
   {
-    "url": "webpack-runtime-0122fd4687df652ad04f.js"
+    "url": "webpack-runtime-14fcf10a5b5c1444e3d8.js"
   },
   {
-    "url": "commons.304df4a907f320f88147.css"
+    "url": "commons.a06576073e455fae9846.css"
   },
   {
     "url": "commons-1099231e5a878f41b30d.js"
   },
   {
-    "url": "app-89622c72be4d28e74dda.js"
+    "url": "app-4b8579667607f6ff94db.js"
   },
   {
     "url": "component---node-modules-gatsby-plugin-offline-app-shell-js-29795a4108267bab3b87.js"
   },
   {
     "url": "offline-plugin-app-shell-fallback/index.html",
-    "revision": "c4ec63c9a76fc6e4ae07b62d09d12c37"
+    "revision": "2553d211fb9960fd9d66679a3ab87805"
   },
   {
     "url": "page-data/offline-plugin-app-shell-fallback/page-data.json",
-    "revision": "9095a5b583a02362cb430974c4686518"
+    "revision": "13890ed94133305888aa512ff25ecb3e"
   },
   {
     "url": "manifest.webmanifest",
-    "revision": "f42f462e51a571f98d3fed04cd904c47"
+    "revision": "bd6c627669f5eeb380059f2c6bc7ebf7"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
@@ -69,12 +69,12 @@ const { NavigationRoute } = workbox.routing
 
 const navigationRoute = new NavigationRoute(async ({ event }) => {
   let { pathname } = new URL(event.request.url)
-  pathname = pathname.replace(new RegExp(`^`), ``)
+  pathname = pathname.replace(new RegExp(`^/FocusOverlay`), ``)
 
   // Check for resources + the app bundle
   // The latter may not exist if the SW is updating to a new version
   const resources = await idbKeyval.get(`resources:${pathname}`)
-  if (!resources || !(await caches.match(`/app-89622c72be4d28e74dda.js`))) {
+  if (!resources || !(await caches.match(`/FocusOverlay/app-4b8579667607f6ff94db.js`))) {
     return await fetch(event.request)
   }
 
@@ -87,7 +87,7 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
     }
   }
 
-  const offlineShell = `/offline-plugin-app-shell-fallback/index.html`
+  const offlineShell = `/FocusOverlay/offline-plugin-app-shell-fallback/index.html`
   return await caches.match(offlineShell)
 })
 

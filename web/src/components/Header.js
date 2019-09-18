@@ -15,7 +15,10 @@ const Header = props => (
     </h1>
     <p>
       Library for creating overlays on focused elements. <br />
-      Use the tab key to focus around different elements.
+      <u>Click</u> or use the <u>tab</u> key to focus elements around the page.
+    </p>
+    <p className="special">
+      <a href="https://github.com/mmahandev/focusoverlay">Github</a>
     </p>
   </header>
 );

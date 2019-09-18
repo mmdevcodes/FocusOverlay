@@ -42,7 +42,11 @@
     "focusoverlay"
   ],
   "sideEffects": false,
-  "dependencies": {},
+  "dependencies": {
+    "react-github-corner": "^2.3.0",
+    "react-markdown": "^4.2.2",
+    "react-syntax-highlighter": "^11.0.2"
+  },
   "devDependencies": {
     "@babel/core": "^7.3.4",
     "@babel/plugin-transform-object-assign": "^7.2.0",

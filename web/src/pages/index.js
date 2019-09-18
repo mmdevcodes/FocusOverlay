@@ -2,11 +2,14 @@ import React from 'react';
 import { Link } from 'gatsby';
 import Helmet from 'react-helmet';
 import Waypoint from 'react-waypoint';
+import ReactMarkdown from 'react-markdown';
+import FocusOverlay from 'focus-overlay';
 
 import Layout from '../components/layout';
 import Header from '../components/Header';
 import Nav from '../components/Nav';
-import pic01 from '../assets/images/pic01.jpg';
+import CodeBlock from '../components/CodeBlock';
+import Examples from '../components/Examples';
 
 class Index extends React.Component {
   constructor(props) {
@@ -14,6 +17,10 @@ class Index extends React.Component {
     this.state = {
       stickyNav: false
     };
+    this.focusoverlay = new FocusOverlay('body', {
+      alwaysActive: true,
+      zIndex: 10001
+    });
   }
 
   _handleWaypointEnter = () => {
@@ -24,6 +31,22 @@ class Index extends React.Component {
     this.setState(() => ({ stickyNav: true }));
   };
 
+  componentDidMount() {
+    this.focusoverlay.moveFocusBox(document.querySelector('body'));
+
+    setTimeout(() => {
+      const initialFocusEl = document.querySelector('#initial-focus');
+
+      if (document.body.contains(initialFocusEl)) {
+        this.focusoverlay.moveFocusBox(initialFocusEl);
+      }
+    }, 1500);
+  }
+
+  componentWillUnmount() {
+    this.focusoverlay.destroy();
+  }
+
   render() {
     return (
       <Layout>
@@ -33,153 +56,226 @@ class Index extends React.Component {
           onEnter={this._handleWaypointEnter}
           onLeave={this._handleWaypointLeave}
         ></Waypoint>
-        <Nav sticky={this.state.stickyNav} />
-
+        <Nav sticky={this.state.stickyNav} fo={this.focusoverlay} />
         <div id="main">
           <section id="intro" className="main">
-            <div className="spotlight">
+            <div className="spotlight align-top">
               <div className="content">
                 <header className="major">
-                  <h2>Ipsum sed adipiscing</h2>
+                  <h2>Getting Started</h2>
                 </header>
-                <p>
-                  Sed lorem ipsum dolor sit amet nullam consequat feugiat
-                  consequat magna adipiscing magna etiam amet veroeros. Lorem
-                  ipsum dolor tempus sit cursus. Tempus nisl et nullam lorem
-                  ipsum dolor sit amet aliquam.
-                </p>
-                <ul className="actions">
-                  <li>
-                    <Link to="/generic" className="button">
-                      Learn More
-                    </Link>
-                  </li>
-                </ul>
+                <ReactMarkdown
+                  source={`
+## Install
+
+Install with npm:
+
+\`\`\`bash
+npm install focusoverlay
+\`\`\`
+
+Install in browser:
+
+\`\`\`html
+<!-- In the <head> -->
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="//unpkg.com/focus-overlay@latest/dist/focusoverlay.css"
+/>
+
+<!-- End of <body> -->
+<script
+  type="text/javascript"
+  src="//unpkg.com/focus-overlay@latest/dist/focusoverlay.js"
+></script>
+\`\`\`
+
+The CSS is small enough to copy directly into your project's main stylesheet if you desire.
+                  `}
+                  renderers={{
+                    code: CodeBlock
+                  }}
+                />
               </div>
-              <span className="image">
-                <img src={pic01} alt="" />
+              <span className="image square">
+                <p>
+                  Library for creating overlays on focused elements. It was
+                  built with accessibility in mind with trigger keys and ARIA
+                  roles.
+                </p>
+                <img
+                  src="https://camo.githubusercontent.com/f111fab117fdcf39da7d84820bb24efb34d7b48a/687474703a2f2f692e696d6775722e636f6d2f7a4d4662376d342e676966"
+                  alt=""
+                />
               </span>
+            </div>
+            <div className="spotlight align-top">
+              <div className="content">
+                <ReactMarkdown
+                  source={`
+## Usage
+
+\`FocusOverlay(element, options)\`
+
+\`\`\`js
+import FocusOverlay from 'focusoverlay';
+
+// Zero config - Scopes to <body> element and uses default settings
+const fo = new FocusOverlay();
+
+// Or define an element
+const fo = new FocusOverlay(document.body, options);
+
+// Or define a CSS selector string
+const fo = new FocusOverlay('body#site-container', options);
+\`\`\`
+
+The \`element\` takes either a string CSS selector or an HTML element. If no element is supplied it will scope to the \`<body>\` element by default.
+
+The \`options\` is an optional parameter. See [options](#options) for more info.
+
+By default Focus Overlay will show and animate when hitting keyboard keys such as the \`Tab\` key. It's also preconfigured to animate via CSS transitions.
+                `}
+                  renderers={{
+                    code: CodeBlock
+                  }}
+                />
+              </div>
             </div>
           </section>
 
-          <section id="first" className="main special">
-            <header className="major">
-              <h2>Magna veroeros</h2>
-            </header>
-            <ul className="features">
-              <li>
-                <span className="icon major style1 fa-code"></span>
-                <h3>Ipsum consequat</h3>
-                <p>
-                  Sed lorem amet ipsum dolor et amet nullam consequat a feugiat
-                  consequat tempus veroeros sed consequat.
-                </p>
-              </li>
-              <li>
-                <span className="icon major style3 fa-copy"></span>
-                <h3>Amed sed feugiat</h3>
-                <p>
-                  Sed lorem amet ipsum dolor et amet nullam consequat a feugiat
-                  consequat tempus veroeros sed consequat.
-                </p>
-              </li>
-              <li>
-                <span className="icon major style5 fa-diamond"></span>
-                <h3>Dolor nullam</h3>
-                <p>
-                  Sed lorem amet ipsum dolor et amet nullam consequat a feugiat
-                  consequat tempus veroeros sed consequat.
-                </p>
-              </li>
-            </ul>
-            <footer className="major">
-              <ul className="actions">
-                <li>
-                  <Link to="/generic" className="button">
-                    Learn More
-                  </Link>
-                </li>
-              </ul>
-            </footer>
+          <section id="first" className="main">
+            <div className="spotlight">
+              <div className="content">
+                <header className="major">
+                  <h2>Options</h2>
+                </header>
+                <ReactMarkdown
+                  source={`
+The default \`options\` are:
+
+\`\`\`js
+// Class added to the focus box
+class: 'focus-overlay',
+// Class added while the focus box is active
+activeClass: 'focus-overlay-active',
+// Class added while the focus box is animating
+animatingClass: 'focus-overlay-animating',
+// Class added to the target element
+targetClass: 'focus-overlay-target',
+// z-index of focus box
+zIndex: 9001,
+// Duration of the animatingClass (milliseconds)
+duration: 500,
+// Removes activeClass after duration
+inactiveAfterDuration: false,
+// Tab, Arrow Keys, Enter, Space, Shift, Ctrl, Alt, ESC
+triggerKeys: [9, 36, 37, 38, 39, 40, 13, 32, 16, 17, 18, 27],
+// Make focus box inactive when a non specified key is pressed
+inactiveOnNonTriggerKey: true,
+// Make focus box inactive when a user clicks
+inactiveOnClick: true,
+// Force the box to always stay active. Overrides everything
+alwaysActive: false,
+// Reposition focus box on transitionEnd for focused elements
+watchTransitionEnd: true,
+// Initialization event
+onInit: function(focusoverlay) {},
+// Before focus box move
+onBeforeMove: function(focusoverlay) {},
+// After focus box move
+onAfterMove: function(focusoverlay) {},
+// After FocusOverlay is destroyed
+onDestroy: function(focusoverlay) {}
+\`\`\`
+
+## Methods
+
+\`\`\`js
+// Example use of the "moveFocusBox" method
+focusoverlay.moveFocusBox(document.querySelector('body'));
+\`\`\`
+
+### moveFocusBox
+
+**Arguments:** Element
+
+Moves the focusBox to a target element
+
+### Destroy
+
+**Arguments:** None
+
+Deconstructs the FocusOverlay instance
+                  `}
+                  renderers={{
+                    code: CodeBlock
+                  }}
+                />
+              </div>
+            </div>
           </section>
 
-          <section id="second" className="main special">
-            <header className="major">
-              <h2>Ipsum consequat</h2>
-              <p>
-                Donec imperdiet consequat consequat. Suspendisse feugiat congue
-                <br />
-                posuere. Nulla massa urna, fermentum eget quam aliquet.
-              </p>
-            </header>
-            <ul className="statistics">
-              <li className="style1">
-                <span className="icon fa-code-fork"></span>
-                <strong>5,120</strong> Etiam
-              </li>
-              <li className="style2">
-                <span className="icon fa-folder-open-o"></span>
-                <strong>8,192</strong> Magna
-              </li>
-              <li className="style3">
-                <span className="icon fa-signal"></span>
-                <strong>2,048</strong> Tempus
-              </li>
-              <li className="style4">
-                <span className="icon fa-laptop"></span>
-                <strong>4,096</strong> Aliquam
-              </li>
-              <li className="style5">
-                <span className="icon fa-diamond"></span>
-                <strong>1,024</strong> Nullam
-              </li>
-            </ul>
-            <p className="content">
-              Nam elementum nisl et mi a commodo porttitor. Morbi sit amet nisl
-              eu arcu faucibus hendrerit vel a risus. Nam a orci mi, elementum
-              ac arcu sit amet, fermentum pellentesque et purus. Integer maximus
-              varius lorem, sed convallis diam accumsan sed. Etiam porttitor
-              placerat sapien, sed eleifend a enim pulvinar faucibus semper quis
-              ut arcu. Ut non nisl a mollis est efficitur vestibulum. Integer
-              eget purus nec nulla mattis et accumsan ut magna libero. Morbi
-              auctor iaculis porttitor. Sed ut magna ac risus et hendrerit
-              scelerisque. Praesent eleifend lacus in lectus aliquam porta. Cras
-              eu ornare dui curabitur lacinia.
-            </p>
-            <footer className="major">
-              <ul className="actions">
-                <li>
-                  <Link to="/generic" className="button">
-                    Learn More
-                  </Link>
-                </li>
-              </ul>
-            </footer>
+          <section id="second" className="main">
+            <div className="spotlight">
+              <div className="content">
+                <header className="major">
+                  <h2>Data Attributes</h2>
+                </header>
+                <ReactMarkdown
+                  source={`
+In some cases you might want FocusOverlay to ignore certain elements, or focus **other** elements instead. There are a few options available:
+
+### Example usage for \`data-focus\`:
+
+\`\`\`html
+<div id="input-wrapper">
+  <input type="text" data-focus="#input-wrapper" />
+</div>
+\`\`\`
+
+In this example when the user focuses the input, FocusOverlay will instead target the wrapper. The \`data-focus\` attribute accepts a querySelector string.
+
+### Example usage for \`data-focus-label\`:
+
+\`\`\`html
+<label for="stylized-checkbox" class="rounded-checkbox">Click me</label>
+<input
+  id="stylized-checkbox"
+  type="checkbox"
+  class="visually-hidden"
+  data-focus-label
+/>
+\`\`\`
+
+In this example when the user focuses the input, FocusOverlay will instead target its associated label.
+
+### Example usage for \`data-focus-ignore\`:
+
+\`\`\`html
+<a href="/info.html" data-focus-ignore>Really important information here!</a>
+\`\`\`
+
+In this example FocusOverlay will not target this element at all.
+                  `}
+                  renderers={{
+                    code: CodeBlock
+                  }}
+                />
+              </div>
+            </div>
           </section>
 
-          <section id="cta" className="main special">
+          <section id="cta" className="main">
             <header className="major">
-              <h2>Congue imperdiet</h2>
+              <h2>Examples</h2>
               <p>
-                Donec imperdiet consequat consequat. Suspendisse feugiat congue
-                <br />
-                posuere. Nulla massa urna, fermentum eget quam aliquet.
+                Below contains various html controls and demonstrates when the
+                keyboard is being used to show FocusOverlay.
               </p>
+              <Examples />
             </header>
-            <footer className="major">
-              <ul className="actions">
-                <li>
-                  <Link to="/generic" className="button special">
-                    Get Started
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/generic" className="button">
-                    Learn More
-                  </Link>
-                </li>
-              </ul>
-            </footer>
           </section>
         </div>
       </Layout>

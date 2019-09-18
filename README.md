@@ -1,4 +1,4 @@
-# FocusOverlay
+# Focus Overlay
 
 Library for creating overlays on focused elements. It was built with accessibility in mind with trigger keys and ARIA roles. [See examples here](https://mmahandev.github.io/FocusOverlay/)
 
@@ -12,7 +12,7 @@ Install with npm:
 npm install focusoverlay
 ```
 
-To install via the browser:
+Install in browser:
 
 ```html
 <!-- In the <head> -->
@@ -84,37 +84,37 @@ alwaysActive: false,
 // Reposition focus box on transitionEnd for focused elements
 watchTransitionEnd: true,
 // Initialization event
-onInit: function() {},
+onInit: function(focusoverlay) {},
 // Before focus box move
-onBeforeMove: function() {},
+onBeforeMove: function(focusoverlay) {},
 // After focus box move
-onAfterMove: function() {},
+onAfterMove: function(focusoverlay) {},
 // After FocusOverlay is destroyed
-onDestroy: function() {}
+onDestroy: function(focusoverlay) {}
 ```
 
 ## Methods
 
 ```js
 // Example use of the "moveFocusBox" method
-$('.site-wrapper').focusOverlay('moveFocusBox', $('#element'));
+focusoverlay.moveFocusBox(document.querySelector('body'));
 ```
-
-### Destroy
-
-**Arguments:** none
-
-Deconstructs the focusOverlay instance
 
 ### moveFocusBox
 
-**Arguments:** jQuery Selector
+**Arguments:** Element
 
 Moves the focusBox to a target element
 
+### Destroy
+
+**Arguments:** None
+
+Deconstructs the FocusOverlay instance
+
 ## Data Attribute Settings
 
-In some cases you might want focusOverlay to ignore certain elements, or focus **other** elements instead. There are a few options available:
+In some cases you might want FocusOverlay to ignore certain elements, or focus **other** elements instead. There are a few options available:
 
 ### Example usage for `data-focus`:
 
@@ -124,7 +124,7 @@ In some cases you might want focusOverlay to ignore certain elements, or focus *
 </div>
 ```
 
-In this example when the user focuses the input, focusOverlay will instead target the wrapper. The `data-focus` attribute accepts a jQuery selector string.
+In this example when the user focuses the input, FocusOverlay will instead target the wrapper. The `data-focus` attribute accepts a querySelector string.
 
 ### Example usage for `data-focus-label`:
 
@@ -138,7 +138,7 @@ In this example when the user focuses the input, focusOverlay will instead targe
 />
 ```
 
-In this example when the user focuses the input, Focus Overlay will instead target its associated label.
+In this example when the user focuses the input, FocusOverlay will instead target its associated label.
 
 ### Example usage for `data-focus-ignore`:
 
@@ -146,7 +146,7 @@ In this example when the user focuses the input, Focus Overlay will instead targ
 <a href="/info.html" data-focus-ignore>Really important information here!</a>
 ```
 
-In this example Focus Overlay will not target this element at all.
+In this example FocusOverlay will not target this element at all.
 
 ## Browser support
 
@@ -155,9 +155,11 @@ Focus Overlay works on all modern browsers including IE11.
 ## Notes
 
 - Special thanks to NV as it was inspired by his [Flying Focus](https://github.com/NV/flying-focus) UI concept.
+- The jQuery version is still available at in the [jQuery](https://github.com/mmahandev/FocusOverlay/tree/jquery) branch. It is no longer mantained.
 
 #### Todo
 
 - Examples page
-- Finish rewriting README
-- Add jQuery variant redirect
+- Make zIndex be CSS only
+- Add refreshPosition method
+- Add currentTarget var

@@ -6,83 +6,92 @@
 
 /* Spotlight */
 
-	.spotlight {
-		@include vendor('display', 'flex');
-		@include vendor('align-items', 'center');
-		margin: 0 0 _size(element-margin) 0;
+.spotlight {
+  @include vendor('display', 'flex');
+  @include vendor('align-items', 'center');
+  margin: 0 0 _size(element-margin) 0;
 
-		.content {
-			@include vendor('flex', '1');
+  .content {
+    @include vendor('flex', '1 1 auto');
 
-			> :last-child {
-				margin-bottom: 0;
-			}
+    > :last-child {
+      margin-bottom: 0;
+    }
 
-			header {
-				&.major {
-					margin: 0 0 _size(element-margin) 0;
-				}
-			}
-		}
+    header {
+      &.major {
+        margin: 0 0 _size(element-margin) 0;
+      }
+    }
+  }
 
-		.image {
-			display: inline-block;
-			margin-left: 4em;
-			padding: 0.65em;
-			border-radius: 100%;
-			border: solid 1px;
+  .image {
+    display: inline-block;
+    margin-left: 2em;
+    padding: 0.65em;
+    border-radius: 100%;
+    border: solid 1px;
+    @include vendor('flex', '1 1 auto');
 
-			img {
-				display: block;
-				border-radius: 100%;
-				width: 16em;
-			}
-		}
+    img {
+      display: block;
+      border-radius: 100%;
+      width: 100%;
+    }
 
-		@include breakpoint(medium) {
-			@include vendor('flex-direction', 'column-reverse');
-			text-align: center;
+    &.square {
+      border-radius: 0;
 
-			.content {
-				@include vendor('flex', '0 1 auto');
-				width: 100%;
+      img {
+        border-radius: 0;
+      }
+    }
+  }
 
-				header {
-					&.major {
-						h2 {
-							&:after {
-								margin-left: auto;
-								margin-right: auto;
-							}
-						}
-					}
-				}
-			}
+  &.align-top {
+    @include vendor('align-items', 'flex-start');
+  }
 
-			.image {
-				@include vendor('flex', '0 1 auto');
-				margin-left: 0;
-				margin-bottom: _size(element-margin);
-			}
-		}
+  @include breakpoint(medium) {
+    @include vendor('flex-direction', 'column-reverse');
+    text-align: center;
 
-		@include breakpoint(small) {
-			.image {
-				padding: 0.35em;
+    .content {
+      @include vendor('flex', '0 1 auto');
+      width: 100%;
 
-				img {
-					width: 12em;
-				}
-			}
-		}
-	}
+      header {
+        &.major {
+          h2 {
+            &:after {
+              margin-left: auto;
+              margin-right: auto;
+            }
+          }
+        }
+      }
+    }
 
-	@mixin color-spotlight($p: null) {
-		.spotlight {
-			.image {
-				border-color: _palette($p, border);
-			}
-		}
-	}
+    .image {
+      @include vendor('flex', '0 1 auto');
+      margin-left: 0;
+      margin-bottom: _size(element-margin);
+    }
+  }
 
-	@include color-spotlight;
+  @include breakpoint(small) {
+    .image {
+      padding: 0.35em;
+    }
+  }
+}
+
+@mixin color-spotlight($p: null) {
+  .spotlight {
+    .image {
+      border-color: _palette($p, border);
+    }
+  }
+}
+
+@include color-spotlight;

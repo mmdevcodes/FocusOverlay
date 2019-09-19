@@ -1,6 +1,6 @@
 # Focus Overlay
 
-Library for creating overlays on focused elements. It was built with accessibility in mind with trigger keys and ARIA roles. [See examples here](https://mmahandev.github.io/FocusOverlay/)
+Library for creating overlays on focused elements. It was built with accessibility in mind with trigger keys and ARIA roles.
 
 ![Focus Overlay](http://i.imgur.com/zMFb7m4.gif)
 
@@ -42,7 +42,7 @@ const fo = new FocusOverlay(document.body, options);
 const fo = new FocusOverlay('body#site-container', options);
 ```
 
-The `element` takes either a string CSS selector or an HTML element. If no element is supplied it will scope to the `<body>` element by default.
+The `element` is what FocusOverlay will be scoped to. It takes either a string CSS selector or an HTML element. If no element is supplied it will scope to the `<body>` element by default.
 
 The `options` is an optional parameter. See [options](#options) for more info.
 
@@ -153,7 +153,6 @@ Focus Overlay works on all modern browsers including IE11.
 
 #### Todo
 
-- Examples page
 - Make zIndex be CSS only
 - Add refreshPosition method
 - Add currentTarget var

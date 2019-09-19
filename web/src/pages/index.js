@@ -23,13 +23,13 @@ class Index extends React.Component {
   };
 
   _handleWaypointLeave = () => {
-    this.setState(() => ({ stickyNav: true }));
+    // this.setState(() => ({ stickyNav: true }));
   };
 
   componentDidMount() {
     import(/* webpackChunkName: "focus-overlay" */ 'focus-overlay')
       .then(({ default: FocusOverlay }) => {
-        this.focusoverlay = new FocusOverlay('body', {
+        this.focusoverlay = new FocusOverlay(document.querySelector('body'), {
           alwaysActive: true,
           zIndex: 10001,
           onBeforeMove: function(fo) {
@@ -39,6 +39,10 @@ class Index extends React.Component {
             console.log('after', fo);
           }
         });
+
+        document
+          .querySelector('#gatsby-focus-wrapper')
+          .setAttribute('data-focus-ignore', '');
 
         this.focusoverlay.moveFocusBox(document.querySelector('body'));
 
@@ -61,7 +65,7 @@ class Index extends React.Component {
     return (
       <Layout>
         <Helmet title="Focus Overlay" />
-        <Header />
+        <Header fo={this.focusoverlay} />
         <Waypoint
           onEnter={this._handleWaypointEnter}
           onLeave={this._handleWaypointLeave}
@@ -134,7 +138,7 @@ const fo = new FocusOverlay(document.body, options);
 const fo = new FocusOverlay('body#site-container', options);
 \`\`\`
 
-The \`element\` takes either a string CSS selector or an HTML element. If no element is supplied it will scope to the \`<body>\` element by default.
+The \`element\` is what FocusOverlay will be scoped to. It takes either a string CSS selector or an HTML element. If no element is supplied it will scope to the \`<body>\` element by default.
 
 The \`options\` is an optional parameter. See [options](#options) for more info.
 
@@ -274,7 +278,7 @@ In this example FocusOverlay will not target this element at all.
 
           <section id="cta" className="main">
             <header className="major">
-              <h2>Examples</h2>
+              <h2 id="examples">Examples</h2>
             </header>
             <p>
               Below contains various html controls and demonstrates when the

@@ -9,7 +9,7 @@
   },
   "author": "mmahandev",
   "scripts": {
-    "build": "gatsby build --prefix-paths",
+    "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write '**/*.js'",
     "deploy": "npm run build && gh-pages -d public"

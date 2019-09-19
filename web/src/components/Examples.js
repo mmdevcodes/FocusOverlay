@@ -1,91 +1,100 @@
 import React from 'react';
 
 const Examples = props => (
-  <div>
+  <div className="examples">
     <div className="section-one">
-      <b>Default Settings</b>
+      <h2>Common controls</h2>
       <div>
         <label>
           {' '}
-          <input type="checkbox" />
+          <input type="checkbox" id="control-1" />
           Checkbox
         </label>
       </div>
       <div>
         <label>
           {' '}
-          <input name="a" type="radio" />
+          <input name="a" type="radio" id="control-2" />
           Radio 1
         </label>
         <label>
           {' '}
-          <input name="b" type="radio" />
+          <input name="b" type="radio" id="control-3" />
           Radio 2
         </label>
       </div>
       <div>
-        <button>Button</button>
+        <button id="control-4">Button</button>
       </div>
       <div>
-        <input type="submit" defaultValue="Submit button" />
+        <input type="submit" value="Submit button" id="control-5" />
       </div>
       <div>
-        <a href="#">Regular Link</a>
+        <a href="#" id="control-6">
+          Regular Link
+        </a>
       </div>
-      <h3 tabIndex={0}>Editable text</h3>
+      <h2 tabIndex={0} id="control-7">
+        Editable text
+      </h2>
       <div>
-        <input placeholder="Single line" />
+        <input placeholder="Single line input" id="control-8" />
       </div>
       <div>
-        <textarea placeholder="Multi line" defaultValue={''} />
+        <textarea placeholder="Multi line input" id="control-9" value={''} />
       </div>
-      <h3>Transitions</h3>
+      <h2>Transitions</h2>
       <div>
-        <a href="#" className="transition-test">
+        <a href="#" className="transition-test" id="control-10">
           Link with focus transition
         </a>
       </div>
-      <div>
-        <a href="#" className="transition-test perm">
-          Link with permanent focus transition
-        </a>
-      </div>
-      <div tabIndex={0}>
-        <a href="#" className="transition-test inner">
+      <div tabIndex={0} id="control-12">
+        <a href="#" className="transition-test inner" id="control-13">
           Link with focus transition and outer element that's focusable
         </a>
       </div>
       <div>
-        <a href="#" className="transition-test inner">
+        <a href="#" className="transition-test inner" id="control-14">
           Link with focus transition and inner element with focus transition
           <span>&nbsp;</span>
         </a>
       </div>
-      <h3>Iframe</h3>
+      <h2>Iframe</h2>
       <iframe
-        title="Inline Frame Example"
-        src="https://www.openstreetmap.org/export/embed.html?bbox=-0.004017949104309083%2C51.47612752641776%2C0.00030577182769775396%2C51.478569861898606&layer=mapnik"
-        width={300}
+        width={320}
         height={200}
+        src="https://www.youtube.com/embed/fEErySYqItI"
+        frameBorder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        id="control-15"
+        title="Inline Frame Example"
       ></iframe>
       <div>
-        <div>
-          <a href="#" className="transition-test">
-            Transitioned link after iframe focus
-          </a>
-        </div>
+        <a href="#" className="transition-test" id="control-16">
+          Transitioned link after iframe focus
+        </a>
       </div>
       <div>
         <a href="#">Regular link before iframe</a>
       </div>
       <iframe
-        src="//mdn-samples.mozilla.org/snippets/html/iframe-simple-contents.html"
-        width={100}
-        height={100}
-        frameBorder={0}
-      />
+        width={320}
+        height={200}
+        src="https://www.youtube.com/embed/fEErySYqItI"
+        frameBorder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        id="control-18"
+        title="Inline Frame Example"
+      ></iframe>
       <div>
-        <input type="text" placeholder="Regular input after iframe" />
+        <input
+          type="text"
+          placeholder="Regular input after iframe"
+          id="control-19"
+        />
       </div>
       <video controls width={250}>
         <source
@@ -99,41 +108,43 @@ const Examples = props => (
         Sorry, your browser doesn't support embedded videos.
       </video>
       <div>
-        <input type="text" placeholder="Item after video" />
+        <input type="text" placeholder="Input after video" id="control-20" />
       </div>
     </div>
     <div className="section-two">
-      <b>
-        <i>alwaysActive</i> set to true
-      </b>
+      <h2>Content Editables</h2>
       <div>
-        <div contentEditable="true">Contenteditable explicitly set to true</div>
+        <div id="control-21" contentEditable="true">
+          Contenteditable explicitly set to true
+        </div>
       </div>
       <div>
-        <div contentEditable>Contenteditable</div>
+        <div id="control-22" contentEditable>
+          Contenteditable
+        </div>
       </div>
       <div>
-        <div role="textbox" contentEditable="true">
+        <div role="textbox" id="control-23" contentEditable="true">
           Contenteditable with textbox role
         </div>
       </div>
-      <h3>
+      <h2>
         Focusable <code>&lt;div&gt;</code>s
-      </h3>
-      <div tabIndex={0}>
+      </h2>
+      <div tabIndex={0} id="control-24">
         <code>tabindex="0"</code>
       </div>
-      <div tabIndex={-1}>
+      <div tabIndex={-1} id="control-25">
         <code>tabindex="-1"</code>
       </div>
-      <div tabIndex={0}>
+      <div tabIndex={0} id="control-26">
         <code>tabindex="0"</code>
       </div>
-      <h3>Selects</h3>
+      <h2>Selects</h2>
       <label>
         Select one from drop-down:
         <br />
-        <select>
+        <select id="control-27">
           <option>Apple</option>
           <option>Orange</option>
           <option>Banana</option>
@@ -142,7 +153,7 @@ const Examples = props => (
       <label>
         Select one from list:
         <br />
-        <select size={5}>
+        <select size={5} id="control-28">
           <option>Apple</option>
           <option>Orange</option>
           <option>Banana</option>
@@ -151,67 +162,53 @@ const Examples = props => (
       <label>
         Select multiple:
         <br />
-        <select multiple>
+        <select multiple id="control-29">
           <option>Apple</option>
           <option>Orange</option>
           <option>Banana</option>
         </select>
       </label>
-      <h3>Other</h3>
-      <label>
-        data-focus-label with no <i>for</i> attribute:
-        <br />
-        <input
-          data-focus-label
-          type="range"
-          min={-20}
-          max={20}
-          defaultValue={0}
-        />
-      </label>
-      <label>
-        Bowling score from 0 to 300:
-        <br />
-        <input type="range" min={0} max={300} defaultValue={0} />
-      </label>
-      <div>
-        <input type="date" defaultValue="2008-09-01" />
+      <h2>Other</h2>
+      <div className="same-line">
+        <input data-focus-label type="checkbox" id="control-30" />
+        <label htmlFor="control-30">data-focus-label checkbox</label>
       </div>
       <div>
-        <input type="time" defaultValue="00:00:00" />
+        <label>
+          data-focus-label with no <code>for</code> attribute:
+          <br />
+          <input
+            data-focus-label
+            type="range"
+            min={-20}
+            max={20}
+            value={0}
+            id="control-31"
+          />
+        </label>
       </div>
       <div>
-        <input type="number" placeholder="Number" />
+        <label>
+          Bowling score from 0 to 300:
+          <br />
+          <input type="range" min={0} max={300} value={0} id="control-32" />
+        </label>
       </div>
       <div>
-        <input type="color" title="Color" defaultValue="#00ff00" />
+        <input type="date" value="2008-09-01" id="control-33" />
       </div>
       <div>
-        <input type="file" title="File" />
+        <input type="time" value="00:00:00" id="control-34" />
       </div>
-    </div>
-    <h3>FocusOverlay is not called on the elements below</h3>
-    <div>
-      <label>
-        {' '}
-        <input type="checkbox" />
-        Checkbox
-      </label>
-    </div>
-    <div>
-      <label>
-        {' '}
-        <input name="a" type="radio" />
-        Radio 1
-      </label>
-      <label>
-        {' '}
-        <input name="b" type="radio" />
-        Radio 2
-      </label>
-    </div>
-    <div>
-      <button>Button</button>
+      <div>
+        <input type="number" placeholder="Number" id="control-35" />
+      </div>
+      <div>
+        <input type="color" title="Color" value="#00ff00" id="control-36" />
+      </div>
+      <div>
+        <input type="file" title="File" id="control-37" />
+      </div>
     </div>
   </div>
 );

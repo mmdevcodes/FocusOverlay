@@ -14,19 +14,13 @@ npm install focus-overlay
 
 Install in browser:
 
+<!-- prettier-ignore -->
 ```html
 <!-- In the <head> -->
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="//unpkg.com/focus-overlay@latest/dist/focusoverlay.css"
-/>
+<link rel="stylesheet" href="//unpkg.com/focus-overlay@latest/dist/focusoverlay.css" />
 
 <!-- End of <body> -->
-<script
-  type="text/javascript"
-  src="//unpkg.com/focus-overlay@latest/dist/focusoverlay.js"
-></script>
+<script src="//unpkg.com/focus-overlay@latest/dist/focusoverlay.js"></script>
 ```
 
 The CSS is small enough to copy directly into your project's main stylesheet if you desire.

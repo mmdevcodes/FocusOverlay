@@ -31,7 +31,13 @@ class Index extends React.Component {
       .then(({ default: FocusOverlay }) => {
         this.focusoverlay = new FocusOverlay('body', {
           alwaysActive: true,
-          zIndex: 10001
+          zIndex: 10001,
+          onBeforeMove: function(fo) {
+            console.log('before', fo);
+          },
+          onAfterMove: function(fo) {
+            console.log('after', fo);
+          }
         });
 
         this.focusoverlay.moveFocusBox(document.querySelector('body'));
@@ -82,17 +88,10 @@ Install in browser:
 
 \`\`\`html
 <!-- In the <head> -->
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="//unpkg.com/focus-overlay@latest/dist/focusoverlay.css"
-/>
+<link rel="stylesheet" href="//unpkg.com/focus-overlay@latest/dist/focusoverlay.css" />
 
 <!-- End of <body> -->
-<script
-  type="text/javascript"
-  src="//unpkg.com/focus-overlay@latest/dist/focusoverlay.js"
-></script>
+<script src="//unpkg.com/focus-overlay@latest/dist/focusoverlay.js"></script>
 \`\`\`
 
 The CSS is small enough to copy directly into your project's main stylesheet if you desire.
@@ -276,12 +275,12 @@ In this example FocusOverlay will not target this element at all.
           <section id="cta" className="main">
             <header className="major">
               <h2>Examples</h2>
-              <p>
-                Below contains various html controls and demonstrates when the
-                keyboard is being used to show FocusOverlay.
-              </p>
-              <Examples />
             </header>
+            <p>
+              Below contains various html controls and demonstrates when the
+              keyboard is being used to show FocusOverlay.
+            </p>
+            <Examples />
           </section>
         </div>
       </Layout>

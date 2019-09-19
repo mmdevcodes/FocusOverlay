@@ -1,0 +1,115 @@
+.examples {
+  h2 {
+    position: relative;
+    margin: 0 0 1em;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 1px;
+      width: 2.5em;
+      background: currentColor;
+    }
+  }
+
+  div:not(.focus-overlay) {
+    margin: 1em 0;
+  }
+
+  div[contenteditable] {
+    width: 10em;
+    min-height: 2em;
+    padding: 0.2em;
+    border: 1px solid #000;
+  }
+
+  div.same-line {
+    display: flex;
+    align-items: center;
+
+    label {
+      margin: 0;
+    }
+  }
+
+  label {
+    display: block;
+    margin: 1em 0;
+  }
+
+  select {
+    width: 10em;
+  }
+
+  .foTest {
+    display: none;
+    margin: 0 10px;
+  }
+
+  a.transition-test {
+    display: block;
+    background: rgba(255, 255, 255, 0.8);
+    max-width: 260px;
+    padding: 10px;
+    text-transform: uppercase;
+    color: #06427c;
+    font-weight: bold;
+    font-size: 15px;
+    font-size: 0.9375rem;
+    border: 1px solid #f28d1d;
+    text-align: center;
+    transition: all 0.3s linear;
+  }
+
+  a.transition-test:hover,
+  a.transition-test:focus {
+    background: #06427c;
+    color: #fff;
+    text-decoration: none;
+    max-width: 280px;
+  }
+
+  a.transition-test.perm.trans {
+    background: #06427c;
+    color: #fff;
+    text-decoration: none;
+    max-width: 300px;
+  }
+
+  a.transition-test.inner span {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: blue;
+    margin: 5px;
+    transition: all 1.5s linear;
+  }
+
+  a.transition-test.inner:hover span,
+  a.transition-test.inner:focus span {
+    background: orange;
+  }
+
+  .section-one {
+    // border: 1px solid blue;
+  }
+
+  .section-two {
+    // border: 1px solid green;
+  }
+
+  .section-two .focus-overlay {
+    box-shadow: 0 0 3px 2px green;
+  }
+
+  .section-two .focus-overlay:after {
+    box-shadow: 0 0 2px 1px green, 0 0 2px green inset;
+  }
+
+  button,
+  input[type='submit'] {
+    font-size: 1em;
+  }
+}

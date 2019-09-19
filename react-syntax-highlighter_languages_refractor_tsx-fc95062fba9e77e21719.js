@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[130],{500:function(s,e,a){"use strict";var n=a(213),t=a(216);function i(s){s.register(n),s.register(t);var e=s.util.clone(s.languages.typescript);s.languages.tsx=s.languages.extend("jsx",e)}s.exports=i,i.displayName="tsx",i.aliases=[]}}]);
+//# sourceMappingURL=react-syntax-highlighter_languages_refractor_tsx-fc95062fba9e77e21719.js.map

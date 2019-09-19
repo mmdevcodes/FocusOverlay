@@ -26,27 +26,27 @@ workbox.clientsClaim();
  */
 self.__precacheManifest = [
   {
-    "url": "webpack-runtime-14fcf10a5b5c1444e3d8.js"
+    "url": "webpack-runtime-94a8404d6722655b3c87.js"
   },
   {
-    "url": "commons.a06576073e455fae9846.css"
+    "url": "commons.cea4a734576da21d96eb.css"
   },
   {
-    "url": "commons-1099231e5a878f41b30d.js"
+    "url": "commons-373cd9deabaf124406e0.js"
   },
   {
-    "url": "app-4b8579667607f6ff94db.js"
+    "url": "app-ffca3e1c876984b922a3.js"
   },
   {
-    "url": "component---node-modules-gatsby-plugin-offline-app-shell-js-29795a4108267bab3b87.js"
+    "url": "component---node-modules-gatsby-plugin-offline-app-shell-js-1343fa864dde885b0aee.js"
   },
   {
     "url": "offline-plugin-app-shell-fallback/index.html",
-    "revision": "2553d211fb9960fd9d66679a3ab87805"
+    "revision": "10dfc30331ffb1b89a730093a2ac8156"
   },
   {
     "url": "page-data/offline-plugin-app-shell-fallback/page-data.json",
-    "revision": "13890ed94133305888aa512ff25ecb3e"
+    "revision": "66b1d70d2da367638177b33ae821c956"
   },
   {
     "url": "manifest.webmanifest",
@@ -69,12 +69,12 @@ const { NavigationRoute } = workbox.routing
 
 const navigationRoute = new NavigationRoute(async ({ event }) => {
   let { pathname } = new URL(event.request.url)
-  pathname = pathname.replace(new RegExp(`^/FocusOverlay`), ``)
+  pathname = pathname.replace(new RegExp(`^`), ``)
 
   // Check for resources + the app bundle
   // The latter may not exist if the SW is updating to a new version
   const resources = await idbKeyval.get(`resources:${pathname}`)
-  if (!resources || !(await caches.match(`/FocusOverlay/app-4b8579667607f6ff94db.js`))) {
+  if (!resources || !(await caches.match(`/app-ffca3e1c876984b922a3.js`))) {
     return await fetch(event.request)
   }
 
@@ -87,7 +87,7 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
     }
   }
 
-  const offlineShell = `/FocusOverlay/offline-plugin-app-shell-fallback/index.html`
+  const offlineShell = `/offline-plugin-app-shell-fallback/index.html`
   return await caches.match(offlineShell)
 })
 

@@ -76,26 +76,6 @@ const Examples = props => (
           Transitioned link after iframe focus
         </a>
       </div>
-      <div>
-        <a href="#">Regular link before iframe</a>
-      </div>
-      <iframe
-        width={320}
-        height={200}
-        src="https://www.youtube.com/embed/fEErySYqItI"
-        frameBorder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-        id="control-18"
-        title="Inline Frame Example"
-      ></iframe>
-      <div>
-        <input
-          type="text"
-          placeholder="Regular input after iframe"
-          id="control-19"
-        />
-      </div>
       <video controls width={250}>
         <source
           src="//interactive-examples.mdn.mozilla.net/media/examples/flower.webm"

@@ -32,19 +32,16 @@ The CSS is small enough to copy directly into your project's main stylesheet if 
 ```js
 import FocusOverlay from 'focusoverlay';
 
-// Zero config - Scopes to <body> element and uses default settings
+// Option 1: Zero config - Scopes to <body> element and uses default settings
 const fo = new FocusOverlay();
 
-// Or define an element
+// Option 2: Define an element
 const fo = new FocusOverlay(document.body, options);
-
-// Or define a CSS selector string
-const fo = new FocusOverlay('body#site-container', options);
 ```
 
 The `element` is what FocusOverlay will be scoped to. It takes either a string CSS selector or an HTML element. If no element is supplied it will scope to the `<body>` element by default.
 
-The `options` is an optional parameter. See [options](#options) for more info.
+The `options` is an optional parameter. Takes an object. See [options](#options) for more info.
 
 By default Focus Overlay will show and animate when hitting keyboard keys such as the `Tab` key. It's also preconfigured to animate via CSS transitions.
 
@@ -156,3 +153,4 @@ Focus Overlay works on all modern browsers including IE11.
 - Make zIndex be CSS only
 - Add refreshPosition method
 - Add currentTarget var
+- Fix iframe focus when alwaysActive is true

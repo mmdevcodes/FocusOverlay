@@ -23,7 +23,7 @@ class Index extends React.Component {
   };
 
   _handleWaypointLeave = () => {
-    // this.setState(() => ({ stickyNav: true }));
+    this.setState(() => ({ stickyNav: false }));
   };
 
   componentDidMount() {
@@ -31,13 +31,7 @@ class Index extends React.Component {
       .then(({ default: FocusOverlay }) => {
         this.focusoverlay = new FocusOverlay(document.querySelector('body'), {
           alwaysActive: true,
-          zIndex: 10001,
-          onBeforeMove: function(fo) {
-            console.log('before', fo);
-          },
-          onAfterMove: function(fo) {
-            console.log('after', fo);
-          }
+          zIndex: 10001
         });
 
         document
@@ -65,7 +59,7 @@ class Index extends React.Component {
     return (
       <Layout>
         <Helmet title="Focus Overlay" />
-        <Header fo={this.focusoverlay} />
+        <Header />
         <Waypoint
           onEnter={this._handleWaypointEnter}
           onLeave={this._handleWaypointLeave}
@@ -128,19 +122,16 @@ The CSS is small enough to copy directly into your project's main stylesheet if 
 \`\`\`js
 import FocusOverlay from 'focusoverlay';
 
-// Zero config - Scopes to <body> element and uses default settings
+// Option 1: Zero config - Scopes to <body> element and uses default settings
 const fo = new FocusOverlay();
 
-// Or define an element
+// Option 2: Define an element
 const fo = new FocusOverlay(document.body, options);
-
-// Or define a CSS selector string
-const fo = new FocusOverlay('body#site-container', options);
 \`\`\`
 
 The \`element\` is what FocusOverlay will be scoped to. It takes either a string CSS selector or an HTML element. If no element is supplied it will scope to the \`<body>\` element by default.
 
-The \`options\` is an optional parameter. See [options](#options) for more info.
+The \`options\` is an optional parameter. Takes an object. See [options](#options) for more info.
 
 By default Focus Overlay will show and animate when hitting keyboard keys such as the \`Tab\` key. It's also preconfigured to animate via CSS transitions.
                 `}

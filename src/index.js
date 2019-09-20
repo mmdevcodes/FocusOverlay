@@ -1,7 +1,7 @@
 import './styles.css';
 import './polyfills/closest';
 import extend from './utils/extend';
-import getAbsoluteBoundingRect from './utils/getAbsoluteBoundingRect';
+import absolutePosition from './utils/absolutePosition';
 import whichTransitionEvent from './utils/whichTransitionEvent';
 
 /**
@@ -275,7 +275,7 @@ export default class FocusOverlay {
      * and throwing errors since you can't get the position values of those.
      */
     if (document.body.contains(targetEl) && targetEl instanceof Element) {
-      const rect = getAbsoluteBoundingRect(targetEl);
+      const rect = absolutePosition(targetEl);
       const width = `${rect.width}px`;
       const height = `${rect.height}px`;
       const left = `${rect.left}px`;
@@ -284,7 +284,12 @@ export default class FocusOverlay {
       this.focusBox.classList.add(this.options.animatingClass);
       this.focusBox.classList.add(this.options.activeClass);
 
-      Object.assign(this.focusBox.style, { width, height, left, top });
+      Object.assign(this.focusBox.style, {
+        width,
+        height,
+        left,
+        top
+      });
 
       // Remove animating/active class after the duration ends.
       this.timeout = setTimeout(() => {

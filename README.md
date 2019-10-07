@@ -30,7 +30,7 @@ The CSS is small enough to copy directly into your project's main stylesheet if 
 `FocusOverlay(element, options)`
 
 ```js
-import FocusOverlay from 'focusoverlay';
+import FocusOverlay from 'focus-overlay';
 
 // Option 1: Zero config - Scopes to <body> element and uses default settings
 const fo = new FocusOverlay();

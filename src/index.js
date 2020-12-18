@@ -3,6 +3,7 @@ import './polyfills/closest';
 import extend from './utils/extend';
 import absolutePosition from './utils/absolutePosition';
 import whichTransitionEvent from './utils/whichTransitionEvent';
+import debounce from './utils/debounce';
 
 /**
  * The plugin constructor
@@ -45,6 +46,12 @@ export default class FocusOverlay {
         alwaysActive: false,
         // Reposition focus box on transitionEnd for focused elements
         watchTransitionEnd: true,
+        // Reposition focus box on scroll event (debounce: default 150ms)
+        debounceScroll: true,
+        // Reposition focus box on resize event (debounce: default 150ms)
+        debounceResize: true,
+        // Defines the waiting time for the debounce function in milliseconds.
+        debounceMs: 150,
         // Initialization event
         onInit: function() {},
         // Before focus box move
@@ -74,6 +81,10 @@ export default class FocusOverlay {
     this.onFocusHandler = this.onFocusHandler.bind(this);
     this.moveFocusBox = this.moveFocusBox.bind(this);
     this.stop = this.stop.bind(this);
+    this.debouncedMoveFocusBox = debounce(
+      this.moveFocusBox,
+      this.options.debounceMs
+    );
 
     // Initialize
     this.init();
@@ -111,6 +122,12 @@ export default class FocusOverlay {
       if (this.active === false) {
         this.active = true;
         window.addEventListener('focusin', this.onFocusHandler, true);
+        if (this.options.debounceScroll) {
+          window.addEventListener('scroll', this.debouncedMoveFocusBox, true);
+        }
+        if (this.options.debounceResize) {
+          window.addEventListener('resize', this.debouncedMoveFocusBox, false);
+        }
       }
 
       /**
@@ -253,6 +270,12 @@ export default class FocusOverlay {
   stop() {
     this.active = false;
     window.removeEventListener('focusin', this.onFocusHandler, true);
+    if (this.options.debounceScroll) {
+      window.removeEventListener('scroll', this.debouncedMoveFocusBox, true);
+    }
+    if (this.options.debounceResize) {
+      window.removeEventListener('resize', this.debouncedMoveFocusBox, false);
+    }
     this._cleanup();
     this.focusBox.classList.remove(this.options.activeClass);
   }
@@ -312,7 +335,8 @@ export default class FocusOverlay {
    */
   destroy() {
     // Remove focusBox
-    this.focusBox.parentNode.removeChild(this.focusBox);
+    this.focusBox.parentElement != null &&
+      this.focusBox.parentNode.removeChild(this.focusBox);
 
     // Remove any extra classes given to other elements if they exist
     this.previousTarget != null &&
@@ -324,6 +348,12 @@ export default class FocusOverlay {
     window.removeEventListener('focusin', this.onFocusHandler, true);
     window.removeEventListener('keydown', this.onKeyDownHandler, false);
     window.removeEventListener('mousedown', this.stop, false);
+    if (this.options.debounceScroll) {
+      window.removeEventListener('scroll', this.debouncedMoveFocusBox, true);
+    }
+    if (this.options.debounceResize) {
+      window.removeEventListener('resize', this.debouncedMoveFocusBox, false);
+    }
 
     this.options.onDestroy(this);
   }

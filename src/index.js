@@ -14,6 +14,7 @@ export default class FocusOverlay {
     this.active = false;
     this.scopedEl;
     this.focusBox;
+    this.currentTarget;
     this.previousTarget;
     this.nextTarget;
     this.timeout = 0;
@@ -191,9 +192,7 @@ export default class FocusOverlay {
       if (focusedEl.getAttribute('data-focus') !== null) {
         const focusSelector = focusedEl.getAttribute('data-focus');
 
-        this.nextTarget = document.querySelector(
-          `[data-focus='${focusSelector}']`
-        );
+        this.nextTarget = focusedEl.closest(focusSelector);
 
         // If the focused element has data-focus-label then focus the associated label
       } else if (focusedEl.getAttribute('data-focus-label') !== null) {
@@ -214,6 +213,8 @@ export default class FocusOverlay {
       } else {
         this.nextTarget = focusedEl;
       }
+
+      this.currentTarget = this.nextTarget;
 
       /**
        * Clear the timeout of the duration just in case if the
@@ -263,7 +264,7 @@ export default class FocusOverlay {
    */
   moveFocusBox(targetEl) {
     // When passed as a handler we'll get the event target
-    if (targetEl instanceof Event) targetEl = document.activeElement;
+    if (targetEl instanceof Event) targetEl = this.currentTarget;
 
     // Marking current element as being targeted
     targetEl.classList.add(this.options.targetClass);

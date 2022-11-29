@@ -2,7 +2,7 @@
   display: none;
   position: relative;
   border-radius: 2px;
-  box-shadow: 0 0 3px 2px #78aeda;
+  box-shadow: 0 0 0 2px #000, 0 0 0 3px #fff;
   transition: all 0.2s cubic-bezier(0, 1, 0, 1);
 }
 
@@ -14,7 +14,7 @@
   width: 100%;
   height: 100%;
   opacity: 0;
-  box-shadow: 0 0 2px 1px #008cff, 0 0 2px #008cff inset;
+  box-shadow: 0 0 0 2px #000, 0 0 0 3px #fff;
   transition: all 0.1s ease-out;
 }
 

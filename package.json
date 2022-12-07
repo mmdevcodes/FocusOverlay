@@ -54,7 +54,7 @@
     "eslint": "^5.15.0",
     "gatsby": "^2.1.18",
     "husky": "^1.3.1",
-    "lint-staged": "^8.1.5",
+    "lint-staged": "^13.1.0",
     "np": "^4.0.2",
     "prettier-eslint": "^8.8.2",
     "prettier-eslint-cli": "^4.7.1",
